@@ -1,0 +1,71 @@
+Blackjack javascript project outline
+CSD122 spring 2022
+Christopher Hunter
+
+   This program will simulate a basic game of blackjack. implementation details:
+
+   - One player will play against the dealer
+   - The game will use a single deck of cards. When the cards are mostly used
+     up, the discarded cards will be re-used, and the deck re-shuffled.
+   - Player starts with 500 chips.
+   - Bets need to be multiples of 10 (otherwise blackjack payouts may turn
+     into fractions, which doesn't make sense for chips)
+   - Player can double down their bet, if their initial card total is 9, 10, or 11.
+     If they choose to double down, they will only recieve one more card
+   - If the dealer has an ace or ten-card showing, they will check their face
+     down card to see if they have blackjack. If they do, it will be revealed
+     immediately, and players who don't also have blackjack will lose their
+     bet
+   - Some traditional blackjack features, like splitting pairs or insurance have
+     not been implemented, as they require greatly increasing complexity.
+
+The project uses three classes:
+
+Card: describes attributes for an individual card
+    --------------
+    +face: string
+    +suit: string
+    +value: number
+    +shown: boolean
+    --------------
+    +hideCard(): void
+    +showCard(): void
+    +toString(): string
+
+Deck: describes a collection of 52 unique Card objects
+    --------------
+    +cards: Card[]
+    --------------
+    +shuffle(): void
+    +getCard(): Card
+
+Hand: describes a collection of Card objects that have been removed from the deck and dealt to a player
+    --------------
+    +name: string
+    +bet: number
+    +stands: boolean
+    +status: string
+    +cards: Card[]
+    --------------
+    +addCard(Card): void
+    +getTotal(): number
+    +setStatus(string): void
+    +displayCards(): string
+    +toString(): string
+
+Additional non-class methods:
+    getInput(string): string
+    whoWon(string, number): console output
+    showCards(string, Card[]): console output
+
+GamePlay proceeds:
+1. get initial bet
+2. enter main loop
+3. check if deck has enough cards left
+4. deal cards
+5. dealer checks for blackjack
+6. check player's hand for possible double down
+7. player turn loop (hit or stand)
+8. dealer turn loop (auto hits or stands based on count)
+9. show results of hand (who won, chip totals)
+10. ask for next bet or exit
